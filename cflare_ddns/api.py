@@ -1,5 +1,5 @@
 import requests
-import exceptions as ex
+from cflare_ddns import exceptions as ex
 
 BASE_URL = "https://api.cloudflare.com/client/v4/zones"
 

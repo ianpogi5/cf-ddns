@@ -1,8 +1,8 @@
 import sys
 import time
-import args
-import config
-from ddns import ddns
+from cflare_ddns import args
+from cflare_ddns import config
+from cflare_ddns.ddns import ddns
 
 
 def main():
@@ -28,7 +28,3 @@ def main():
     except Exception as err:
         print(err)
         sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()

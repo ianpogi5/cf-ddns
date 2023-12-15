@@ -1,6 +1,6 @@
 import re
 import requests
-import exceptions as ex
+from cflare_ddns import exceptions as ex
 
 
 def get_public():

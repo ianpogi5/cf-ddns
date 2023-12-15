@@ -1,5 +1,5 @@
-import api
-import ip
+from cflare_ddns import api
+from cflare_ddns import ip
 
 
 def ddns(
