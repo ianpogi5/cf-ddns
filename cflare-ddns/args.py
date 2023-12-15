@@ -1,7 +1,7 @@
 import os
 from argparse import ArgumentParser
 
-DEFAULT_CONFIG = "/etc/cf-ddns.json"
+DEFAULT_CONFIG = "/etc/cflare-ddns.json"
 
 # 15 minutes
 DEFAULT_INTERVAL = 60 * 15

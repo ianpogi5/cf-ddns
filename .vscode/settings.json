@@ -4,5 +4,5 @@
     "editor.formatOnSave": true
   },
   "black-formatter.args": ["--line-length", "79"],
-  "python.analysis.extraPaths": ["./cf-ddns"]
+  "python.analysis.extraPaths": ["./cflare-ddns"]
 }

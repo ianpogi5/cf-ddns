@@ -90,8 +90,8 @@ def get_ip(
 
     Returns:
         tuple
-          - str: current ip
-          - str: current record id
+            - str: current ip
+            - str: current record id
     """
 
     # Get the current A record details

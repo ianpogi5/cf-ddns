@@ -1,6 +1,6 @@
 class CFDDNSError(Exception):
     """
-    Base exception for cf-ddns
+    Base exception for cflare-ddns
     """
 
     pass

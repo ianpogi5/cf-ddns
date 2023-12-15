@@ -1,11 +1,11 @@
-# cf-ddns
+# cflare-ddns
 
 This is yet another Cloudflare Dynamic DNS application.
 
 ## Usage
 
 ```shell
-usage: cf-ddns [-h] [-c CONFIG_FILE] [-i INTERVAL]
+usage: cflare-ddns [-h] [-c CONFIG_FILE] [-i INTERVAL]
 
 options:
   -h, --help            show this help message and exit
