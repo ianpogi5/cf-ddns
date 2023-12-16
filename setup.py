@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="cflare-ddns",
+    long_description="Yet another Cloudflare Dynamic DNS application.",
     version="0.2.0",
     author="Ian Dela Cruz",
     author_email="iandc76@gmail.com",
