@@ -21,6 +21,14 @@ def check_config():
 def init():
     args_parse = ArgumentParser()
 
+    args_parse.add_argument(
+        "-v",
+        "--version",
+        action="version",
+        version=version("cflare-ddns"),
+        help="App version",
+    )
+
     existing_config = check_config()
     default_config = os.environ.get(
         "CF_DDNS_CONFIG",
@@ -50,13 +58,5 @@ def init():
             "This will make the program run forever."
             "Hit Ctrl-C to stop."
         ),
-    )
-
-    args_parse.add_argument(
-        "-v",
-        "--version",
-        action="version",
-        version=version("cflare-ddns"),
-        help="App version",
     )
     return args_parse
