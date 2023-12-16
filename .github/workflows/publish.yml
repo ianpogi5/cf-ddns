@@ -24,7 +24,7 @@ jobs:
           echo $result
           result=$(echo "$result" | sed "s/release-/$REPLACEMENT/")
           echo $result
-          echo "TAG_NAME=$result >> $GITHUB_OUTPUT
+          echo "TAG_NAME=$result" >> $GITHUB_OUTPUT
       - name: Update version in setup.py
         run: >-
           sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
