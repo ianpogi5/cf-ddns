@@ -5,6 +5,7 @@ on: push
 jobs:
   build:
     name: Build distribution 📦
+    if: startsWith(github.ref, 'refs/tags/') # only build on tag pushes
     runs-on: ubuntu-latest
 
     steps:
@@ -15,8 +16,12 @@ jobs:
           python-version: "3.x"
       - name: Extract tag name
         id: tag
-        # run: echo ::set-output name=TAG_NAME::$(echo $GITHUB_REF | cut -d / -f 3)
-        run: echo "TAG_NAME=0.1.0-alpha-$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        run: >-
+          tag=$(echo $GITHUB_REF | cut -d / -f 3)
+          REPLACEMENT=""
+          result=$(echo "$tag" | sed "s/test-/$REPLACEMENT/")
+          result=$(echo "$result" | sed "s/release-/$REPLACEMENT/")
+          echo ::set-output name=TAG_NAME::$result
       - name: Update version in setup.py
         run: >-
           sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
@@ -37,7 +42,7 @@ jobs:
   publish-to-pypi:
     name: >-
       Publish Python 🐍 distribution 📦 to PyPI
-    if: startsWith(github.ref, 'refs/tags/') # only publish to PyPI on tag pushes
+    if: startsWith(github.ref, 'refs/tags/release-') # only publish to PyPI on tag pushes
     needs:
       - build
     runs-on: ubuntu-latest
@@ -101,6 +106,7 @@ jobs:
 
   publish-to-testpypi:
     name: Publish Python 🐍 distribution 📦 to TestPyPI
+    if: startsWith(github.ref, 'refs/tags/test-') # only publish to TestPyPI on tag pushes
     needs:
       - build
     runs-on: ubuntu-latest
