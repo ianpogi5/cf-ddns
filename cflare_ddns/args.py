@@ -31,4 +31,9 @@ def init():
             "This will make the program run forever."
         ),
     )
+    args_parse.add_argument(
+        "-v",
+        "--version",
+        action="store_true",
+    )
     return args_parse
