@@ -2,6 +2,8 @@
 
 This is yet another Cloudflare Dynamic DNS application.
 
+[![PyPI - Version](https://img.shields.io/pypi/v/cflare-ddns)](https://pypi.org/project/cflare-ddns/) ![Python](https://img.shields.io/badge/python-3670A0?logo=python&logoColor=ffdd54) ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?logo=Cloudflare&logoColor=white) [![License](https://img.shields.io/github/license/Ileriayo/markdown-badges)](./LICENSE)
+
 ## Installation
 
 ```shell
@@ -72,7 +74,7 @@ To run every 15 minutes:
 */15 * * * * cflare-ddns
 ```
 
-## CLI Reference
+### CLI Reference
 
 ```shell
 usage: cflare-ddns [-h] [-c CONFIG_FILE] [-i INTERVAL] [-v]
