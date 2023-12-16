@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="cflare-ddns",
-    version="0.1.5",
+    version="0.2.0",
     author="Ian Dela Cruz",
     author_email="iandc76@gmail.com",
     url="https://github.com/ianpogi5/cflare-ddns",
