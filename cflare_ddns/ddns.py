@@ -1,5 +1,4 @@
 from cflare_ddns import api
-from cflare_ddns import ip
 
 
 def ddns(
@@ -8,8 +7,22 @@ def ddns(
     zone_id: str,
     domain: str,
     record_name: str,
-):
-    new_ip = ip.get_public()
+    new_ip: str,
+) -> None:
+    """
+    This will get the current ip and record_id
+
+    Args:
+        email (str): Cloudflare email account
+        api_key (str): Cloudflare api_key
+        zone_id (str): Zone id from cloudflare
+        domain (str): Your domain name
+        record_name (str): Your subdomain name
+        new_ip (str): The new public ip
+
+    Returns:
+        None
+    """
     current_ip, current_record_id = api.get_ip(
         email,
         api_key,

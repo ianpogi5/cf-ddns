@@ -3,7 +3,16 @@ import requests
 from cflare_ddns import exceptions as ex
 
 
-def get_public():
+def get_public() -> str:
+    """
+    This will get the public ip
+
+    Args:
+        None
+
+    Returns:
+        str: The new public ip
+    """
     try:
         # Use a public IP address retrieval service
         response = requests.get("https://cloudflare.com/cdn-cgi/trace")

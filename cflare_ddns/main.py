@@ -3,6 +3,7 @@ import time
 from cflare_ddns import args
 from cflare_ddns import config
 from cflare_ddns.ddns import ddns
+from cflare_ddns import ip
 
 
 def main():
@@ -13,6 +14,7 @@ def main():
             if ap.config_file is None:
                 print("Please specify config file")
             conf = config.parse(ap.config_file)
+            new_ip = ip.get_public()
             for rec in conf["records"]:
                 ddns(
                     email=conf["email"],
@@ -20,6 +22,7 @@ def main():
                     zone_id=rec["zone_id"],
                     domain=rec["domain"],
                     record_name=rec["record_name"],
+                    new_ip=new_ip,
                 )
             if ap.interval is None:
                 sys.exit(0)
