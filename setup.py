@@ -25,7 +25,7 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            "cflare-ddns=cflare_ddns.main:main",
+            "cflare-ddns=cflare_ddns.__main__:start",
         ],
     },
     classifiers=[
