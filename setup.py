@@ -1,8 +1,13 @@
 from setuptools import setup, find_packages
 
+# read the contents of your README file
+from pathlib import Path
+
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
+
 setup(
     name="cflare-ddns",
-    long_description="Yet another Cloudflare Dynamic DNS application.",
     version="0.2.0",
     author="Ian Dela Cruz",
     author_email="iandc76@gmail.com",
@@ -14,4 +19,6 @@ setup(
             "cflare-ddns=cflare_ddns.main:main",
         ],
     },
+    long_description=long_description,
+    long_description_content_type="text/markdown",
 )
