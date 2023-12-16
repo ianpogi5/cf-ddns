@@ -20,7 +20,7 @@ Edit the config file, you'll need to provide the following:
 - `domain` - The domain name. Example: `example.com`
 - `record_name` - The sub domain you want to update with your public ip. This subdomain should be an `A` record type. Example: `www`
 
-### Configuration file example
+Configuration file example:
 
 ```json
 {
@@ -41,6 +41,37 @@ Edit the config file, you'll need to provide the following:
 }
 ```
 
+Running the scrip with config in default location:
+
+```shell
+cflare-ddns
+```
+
+Running the scrip with config in non-default location:
+
+```shell
+cflare-ddns -c /opt/somewhere/config.json
+```
+
+You can add this to your [cronjobs](https://crontab.guru/) to run periodically.
+
+```shell
+* * * * * cflare-ddns
+- - - - -
+| | | | |
+| | | | ----- Day of week (0 - 7) (Sunday=0 or 7)
+| | | ------- Month (1 - 12)
+| | --------- Day of month (1 - 31)
+| ----------- Hour (0 - 23)
+------------- Minute (0 - 59)
+```
+
+To run every 15 minutes:
+
+```cron
+*/15 * * * * cflare-ddns
+```
+
 ## CLI Reference
 
 ```shell
@@ -48,11 +79,13 @@ usage: cflare-ddns [-h] [-c CONFIG_FILE] [-i INTERVAL] [-v]
 
 options:
   -h, --help            show this help message and exit
+  -v, --version         App version
   -c CONFIG_FILE, --config CONFIG_FILE
-                        Path to your configuration file. Default paths: /etc/cflare-ddns.json,
-                        cflare-ddns.json
+                        Path to your configuration file.
+                        Default paths:
+                          /etc/cflare-ddns.json,
+                          cflare-ddns.json
   -i INTERVAL, --interval INTERVAL
                         Number of seconds between each sync. This will make the program run
                         forever.Hit Ctrl-C to stop.
-  -v, --version         App version
 ```
