@@ -23,6 +23,7 @@ def ddns(
     Returns:
         None
     """
+    print(f"Getting current ip for {record_name}.{domain}")
     current_ip, current_record_id = api.get_ip(
         email,
         api_key,
@@ -31,6 +32,7 @@ def ddns(
         record_name,
     )
     if new_ip != current_ip:
+        print(f"Setting new ip for {record_name}.{domain}")
         api.set_ip(
             email,
             api_key,
@@ -40,5 +42,6 @@ def ddns(
             current_record_id,
             new_ip,
         )
+        print(f"{record_name}.{domain} ip address set to {new_ip}")
     else:
-        print("IP address did not change.")
+        print(f"{record_name}.{domain} ip address did not change")

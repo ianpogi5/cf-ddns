@@ -15,6 +15,7 @@ def main():
                 print("Please specify config file")
             conf = config.parse(ap.config_file)
             new_ip = ip.get_public()
+            print(f"Your public ip: {new_ip}")
             for rec in conf["records"]:
                 ddns(
                     email=conf["email"],
