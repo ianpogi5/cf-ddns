@@ -18,9 +18,12 @@ jobs:
         id: tag
         run: >-
           tag=$(echo $GITHUB_REF | cut -d / -f 3)
+          echo $tag
           REPLACEMENT=""
           result=$(echo "$tag" | sed "s/test-/$REPLACEMENT/")
+          echo $result
           result=$(echo "$result" | sed "s/release-/$REPLACEMENT/")
+          echo $result
           echo ::set-output name=TAG_NAME::$result
       - name: Update version in setup.py
         run: >-
