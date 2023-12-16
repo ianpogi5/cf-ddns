@@ -43,13 +43,13 @@ Configuration file example:
 }
 ```
 
-Running the scrip with config in default location:
+Running the script with config in the default location:
 
 ```shell
 cflare-ddns
 ```
 
-Running the scrip with config in non-default location:
+Running the script with config in non-default location:
 
 ```shell
 cflare-ddns -c /opt/somewhere/config.json
