@@ -16,7 +16,7 @@ First is you need to create a config file. You can place it in the default locat
 
 Edit the config file, you'll need to provide the following:
 
-- `api_key` - You can get this through this [link](https://developers.cloudflare.com/fundamentals/api/get-started/keys/).
+- `api_key` - You can get this in your cloudflare dashboard. Follow this [link](https://developers.cloudflare.com/fundamentals/api/get-started/keys/) to get full instructions.
 - `email` - The email account you use in cloudflare.
 - `zone_id` - [Zone ID](https://developers.cloudflare.com/fundamentals/setup/find-account-and-zone-ids/) of your domain name.
 - `domain` - The domain name. Example: `example.com`
