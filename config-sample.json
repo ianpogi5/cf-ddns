@@ -1,0 +1,11 @@
+{
+  "api_key": "your-api-key",
+  "email": "your@email.com",
+  "records": [
+    {
+      "zone_id": "zone-id1",
+      "domain": "example.xyz",
+      "record_name": "www"
+    }
+  ]
+}
