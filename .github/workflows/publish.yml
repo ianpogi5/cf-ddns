@@ -16,7 +16,7 @@ jobs:
           python-version: "3.x"
       - name: Extract tag name
         id: tag
-        run: >-
+        run: |
           tag=$(echo $GITHUB_REF | cut -d / -f 3)
           echo $tag
           REPLACEMENT=""
@@ -24,7 +24,7 @@ jobs:
           echo $result
           result=$(echo "$result" | sed "s/release-/$REPLACEMENT/")
           echo $result
-          echo ::set-output name=TAG_NAME::$result
+          echo "TAG_NAME=$result >> $GITHUB_OUTPUT
       - name: Update version in setup.py
         run: >-
           sed -i "s/{{VERSION_PLACEHOLDER}}/${{ steps.tag.outputs.TAG_NAME }}/g" setup.py
