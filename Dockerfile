@@ -5,9 +5,6 @@ ENV WORKDIR=/cflare-ddns
 RUN mkdir "$WORKDIR"
 WORKDIR "$WORKDIR"
 
-# Update pip
-RUN pip install --no-cache-dir --upgrade pip
-
 # Prepare codes
 ARG CFLARE_DDNS_VERSION
 COPY ./cflare_ddns cflare_ddns/
