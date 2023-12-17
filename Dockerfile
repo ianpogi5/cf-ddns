@@ -5,11 +5,6 @@ ENV WORKDIR=/cflare-ddns
 RUN mkdir "$WORKDIR"
 WORKDIR "$WORKDIR"
 
-# Create virtual environment
-ENV VIRTUAL_ENV=/cflare-ddns/venv
-RUN python -m venv "$VIRTUAL_ENV"
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
-
 # Update pip
 RUN pip install --no-cache-dir --upgrade pip
 
