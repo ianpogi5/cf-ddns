@@ -7,8 +7,10 @@ on:
 jobs:
   build:
     name: Build distribution 📦
-    if: startsWith(github.ref, 'refs/tags/') # only build on tag pushes
+    if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.tag.outputs.TAG_NAME }}
 
     steps:
       - uses: actions/checkout@v4
@@ -47,7 +49,7 @@ jobs:
   publish-to-pypi:
     name: >-
       Publish Python 🐍 distribution 📦 to PyPI
-    if: startsWith(github.ref, 'refs/tags/release-') # only publish to PyPI on tag pushes
+    if: startsWith(github.ref, 'refs/tags/release-')
     needs:
       - build
     runs-on: ubuntu-latest
@@ -68,7 +70,7 @@ jobs:
 
   publish-to-testpypi:
     name: Publish Python 🐍 distribution 📦 to TestPyPI
-    if: startsWith(github.ref, 'refs/tags/test-') # only publish to TestPyPI on tag pushes
+    if: startsWith(github.ref, 'refs/tags/test-')
     needs:
       - build
     runs-on: ubuntu-latest
@@ -90,3 +92,46 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           repository-url: https://test.pypi.org/legacy/
+
+  publish-to-docker:
+    name: Publish to Docker Hub
+    if: startsWith(github.ref, 'refs/tags/release-')
+    needs:
+      - build
+      - publish-to-pypi
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: |
+            ianpogi5/cflare-ddns
+            ghcr.io/${{ github.repository }}
+
+      - name: Build and push Docker images
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          push: true
+          build-args: |
+            CFLARE_DDNS_VERSION=${{ needs.build.outputs.version }}
+          tags: |
+            ianpogi5/cflare-ddns:latest
+            ianpogi5/cflare-ddns:${{ needs.build.outputs.version }}

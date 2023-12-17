@@ -2,7 +2,7 @@
 
 This is yet another Cloudflare Dynamic DNS application.
 
-[![PyPI - Version](https://img.shields.io/pypi/v/cflare-ddns)](https://pypi.org/project/cflare-ddns/) ![Python](https://img.shields.io/badge/python-3670A0?logo=python&logoColor=ffdd54) ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?logo=Cloudflare&logoColor=white) [![License](https://img.shields.io/github/license/Ileriayo/markdown-badges)](./LICENSE)
+[![PyPI - Version](https://img.shields.io/pypi/v/cflare-ddns)](https://pypi.org/project/cflare-ddns/) [![Docker Pulls](https://img.shields.io/docker/pulls/ianpogi5/cflare-ddns)](https://hub.docker.com/r/ianpogi5/cflare-ddns) [![Docker Image Size (tag)](https://img.shields.io/docker/image-size/ianpogi5/cflare-ddns/latest)](https://hub.docker.com/r/ianpogi5/cflare-ddns) ![Python](https://img.shields.io/badge/python-3670A0?logo=python&logoColor=ffdd54) ![Cloudflare](https://img.shields.io/badge/Cloudflare-F38020?logo=Cloudflare&logoColor=white) [![License](https://img.shields.io/github/license/Ileriayo/markdown-badges)](./LICENSE)
 
 ## Installation
 
@@ -90,4 +90,27 @@ options:
   -i INTERVAL, --interval INTERVAL
                         Number of seconds between each sync. This will make the program run
                         forever.Hit Ctrl-C to stop.
+```
+
+## Docker
+
+Example on running on docker:
+
+```shell
+docker run -e CF_DDNS_INTERVAL=900 -v $(pwd)/cflare-ddns.json:/etc/cflare-ddns.json --rm ianpogi5/cflare-ddns:latest
+```
+
+Example using `docker-compose.yml`:
+
+```yaml
+version: "3.9"
+services:
+  cflare-ddns:
+    image: ianpogi5/cflare-ddns:latest
+    container_name: cflare-ddns
+    environment:
+      - CF_DDNS_INTERVAL=900
+    volumes:
+      - /YOUR/PATH/TO/cflare-ddns.json:/etc/cflare-ddns.json
+    restart: unless-stopped
 ```

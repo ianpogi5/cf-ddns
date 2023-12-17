@@ -1,6 +1,31 @@
 FROM python:3.12-alpine
 
-RUN pip install --no-cache-dir --upgrade pip
-RUN pip install cflare-ddns
+# Create WORKDIR
+ENV WORKDIR=/cflare-ddns
+RUN mkdir "$WORKDIR"
+WORKDIR "$WORKDIR"
 
-CMD ["python3", "-u", "-m", "cflare_ddns"]
+# Create virtual environment
+ENV VIRTUAL_ENV=/cflare-ddns/venv
+RUN python -m venv "$VIRTUAL_ENV"
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+
+# Update pip
+RUN pip install --no-cache-dir --upgrade pip
+
+# Prepare codes
+ARG CFLARE_DDNS_VERSION
+COPY ./cflare_ddns cflare_ddns/
+COPY README.md .
+COPY setup.py .
+RUN sed -i "s/{{VERSION_PLACEHOLDER}}/${CFLARE_DDNS_VERSION}/g" setup.py
+
+# Install self
+RUN pip install .
+
+# Do not buffer stdout and stderr
+ENV PYTHONUNBUFFERED=true
+
+# Run cflare-ddns
+CMD ["cflare-ddns"]
+
